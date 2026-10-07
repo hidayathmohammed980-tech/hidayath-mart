@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hidayath Mart | Smart Product Recommendations</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f7fa;color:#17212b;line-height:1.55}
+header{background:#0b63ce;color:white;padding:14px;position:sticky;top:0;z-index:5}.bar{max-width:1100px;margin:auto;display:flex;align-items:center;gap:15px;flex-wrap:wrap}
+.logo{font-size:23px;font-weight:800}.search{flex:1;min-width:180px;padding:11px;border:0;border-radius:7px}.nav a{color:white;margin:0 6px;font-size:14px}
+.wrap{max-width:1100px;margin:auto;padding:18px 15px 50px}.hero,.card{background:white;border-radius:14px;padding:24px;box-shadow:0 2px 9px #ddd;margin-bottom:18px}
+.hero{background:linear-gradient(135deg,#e6f2ff,#fff)}h1{font-size:32px}h2{margin-top:28px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.catgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.cat{background:white;padding:18px;border-radius:12px;box-shadow:0 2px 7px #ddd}.emoji{font-size:32px}
+.btn{display:inline-block;background:#0b63ce;color:white;padding:9px 14px;border-radius:6px;font-weight:bold;margin-top:8px}.orange{background:#ffad00;color:#111}
+.disclosure{background:#fff7d9;border-left:5px solid #d79b00;padding:12px;margin:15px 0;font-size:13px}.paid{font-size:12px;color:#805600;font-weight:bold}
+.tag{font-size:12px;background:#e8f2ff;color:#075bbd;padding:4px 9px;border-radius:20px}.page{display:none}.page.active{display:block}
+footer{background:#17212b;color:#dfe8f0;padding:30px 15px}footer a{color:white;margin-right:15px}.small{font-size:13px;color:#aebbc7}
+@media(max-width:700px){.grid,.catgrid{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.hero h1{font-size:27px}}
+</style></head>
+<body>
+<header><div class="bar"><div class="logo">Hidayath Mart</div>
+<input class="search" id="search" placeholder="Search buying guides..." oninput="search()">
+<div class="nav"><a href="#" onclick="show('home')">Home</a><a href="#" onclick="show('guides')">Guides</a><a href="#" onclick="show('about')">About</a></div></div></header>
+<div class="wrap">
+<section id="home" class="page active">
+<div class="hero"><h1>Smart choices. Better products.</h1><p>Practical product recommendations, comparisons and buying guides for everyday shoppers.</p><a class="btn orange" href="#" onclick="show('guides')">Explore Guides</a></div>
+<div class="disclosure"><b>Affiliate disclosure:</b> As an Amazon Associate I earn from qualifying purchases. Some links on this website are paid links.</div>
+<h2>Shop by Category</h2><div class="catgrid">
+<div class="cat">📱 <b>Electronics & Gadgets</b><p>Earbuds, headphones, smartwatches and accessories.</p></div>
+<div class="cat">🏠 <b>Home & Kitchen</b><p>Useful products for everyday home life.</p></div>
+<div class="cat">🎒 <b>Travel & Lifestyle</b><p>Practical products for trips and daily use.</p></div>
+<div class="cat">💻 <b>Work & Computer</b><p>Desk, computer and work-from-home accessories.</p></div>
+</div>
+<h2>Featured Recommendations</h2><div class="grid">
+<div class="card"><span class="tag">Electronics</span><h3>Wireless Headphones</h3><p>Compare comfort, battery, microphone and connectivity.</p><a class="btn" href="#" onclick="amazon('wireless headphones')">Check Price on Amazon</a><div class="paid">(paid link)</div></div>
+<div class="card"><span class="tag">Work</span><h3>Laptop Stands</h3><p>Consider height, stability, portability and cooling.</p><a class="btn" href="#" onclick="amazon('laptop stand')">Check Price on Amazon</a><div class="paid">(paid link)</div></div>
+<div class="card"><span class="tag">Travel</span><h3>Travel Backpacks</h3><p>Look for comfort, compartments and durable material.</p><a class="btn" href="#" onclick="amazon('travel backpack')">Check Price on Amazon</a><div class="paid">(paid link)</div></div>
+</div></section>
+
+<section id="guides" class="page"><h1>Buying Guides</h1><p>Original practical guides to help you decide what to look for before shopping.</p><div id="list" class="grid"></div></section>
+<section id="article" class="page"></section>
+<section id="about" class="page"><h1>About Hidayath Mart</h1><div class="card"><p>Hidayath Mart is an independent product recommendation website. We create practical guides and comparisons to make online shopping decisions easier.</p><p>We are not Amazon and are not owned by Amazon. When you use an affiliate link, you may be taken to Amazon to complete your purchase.</p></div></section>
+<section id="contact" class="page"><h1>Contact</h1><div class="card"><p>For questions, corrections or partnership enquiries:</p><p><b>Email:</b> your-email@example.com</p><p>Replace this placeholder with your real email before publishing.</p></div></section>
+<section id="privacy" class="page"><h1>Privacy Policy</h1><div class="card"><p>Hidayath Mart respects your privacy. Affiliate links may take you to third-party websites that have their own privacy and cookie policies. This template should be updated to describe the actual analytics, cookies, contact forms and services used on your published site.</p></div></section>
+<section id="disclosure" class="page"><h1>Affiliate Disclosure</h1><div class="card"><p><b>As an Amazon Associate I earn from qualifying purchases.</b></p><p>Some links are affiliate links. If you click an eligible link and make a qualifying purchase, we may earn a commission at no additional cost to you.</p><p>Prices, availability and specifications can change, so verify current information on the retailer's page before purchasing.</p></div></section>
+</div>
+<footer><div style="max-width:1100px;margin:auto"><b>Hidayath Mart</b><p class="small">Independent product recommendations and buying guides.</p><a href="#" onclick="show('about')">About</a><a href="#" onclick="show('contact')">Contact</a><a href="#" onclick="show('privacy')">Privacy</a><a href="#" onclick="show('disclosure')">Affiliate Disclosure</a><p class="small">As an Amazon Associate I earn from qualifying purchases.</p></div></footer>
+
+<script>
+const guides=[
+["Best Budget Wireless Headphones","Electronics","Compare comfort, battery life, microphone quality and connectivity.","wireless headphones"],
+["Best Earbuds for Everyday Use","Electronics","Check fit, sound, call quality, battery life and charging.","earbuds"],
+["Best Smartwatches for Beginners","Electronics","Compare display, battery, fitness features and phone compatibility.","smartwatch"],
+["Best Power Banks for Travel","Electronics","Consider capacity, charging speed, ports and portability.","power bank"],
+["Best Work-from-Home Accessories","Work","Useful desk upgrades for people who work or study at home.","work from home accessories"],
+["Best Laptop Stands","Work","Compare height, stability, portability and cooling design.","laptop stand"],
+["Best Computer Accessories","Work","A practical checklist for keyboards, mice, webcams and USB hubs.","computer accessories"],
+["Best Useful Kitchen Gadgets","Home","Choose products that save time, are easy to clean and solve a real need.","kitchen gadgets"],
+["Best Travel Accessories","Travel","Compare organizers, backpacks, bottles and other useful essentials.","travel accessories"],
+["Best Budget Home Products","Home","Compare usefulness, durability and ease of use for everyday products.","home products"]
+];
+function show(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);if(id==='guides')render(guides)}
+function render(arr){document.getElementById('list').innerHTML=arr.map((g,i)=>`<div class="card"><span class="tag">${g[1]}</span><h3>${g[0]}</h3><p>${g[2]}</p><a class="btn" href="#" onclick="read(${guides.indexOf(g)})">Read Guide</a></div>`).join('')}
+function read(i){let g=guides[i];document.getElementById('article').innerHTML=`<div class="card"><a href="#" onclick="show('guides')">← Back to guides</a><p><span class="tag">${g[1]}</span></p><h1>${g[0]}</h1><p>${g[2]}</p><h2>What to look for</h2><p>Start with your actual use case. Compare the features that matter to you rather than choosing only from the longest specification list.</p><h2>Quick checklist</h2><ul><li>Choose features that solve your specific need.</li><li>Check compatibility with your existing devices.</li><li>Consider size, durability and ease of use.</li><li>Verify current product information before buying.</li></ul><h2>Our approach</h2><p>Hidayath Mart focuses on practical value and clear explanations. Prices, specifications and availability can change, so verify current information on the retailer's page.</p><a class="btn orange" href="#" onclick="amazon('${g[3]}')">Check Current Options on Amazon</a> <span class="paid">(paid link)</span><div class="disclosure"><b>Affiliate disclosure:</b> As an Amazon Associate I earn from qualifying purchases.</div></div>`;show('article')}
+function search(){let q=document.getElementById('search').value.toLowerCase();show('guides');render(guides.filter(g=>(g[0]+' '+g[1]+' '+g[2]).toLowerCase().includes(q)))}
+function amazon(q){alert('This is a safe placeholder. After you join Amazon Associates, replace this button with the Amazon Special Link generated in Associates Central for: '+q)}
+render(guides);
+</script></body></html>
