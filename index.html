@@ -45,22 +45,114 @@ footer{background:#17212b;color:#dfe8f0;padding:30px 15px}footer a{color:white;m
 <footer><div style="max-width:1100px;margin:auto"><b>Hidayath Mart</b><p class="small">Independent product recommendations and buying guides.</p><a href="#" onclick="show('about')">About</a><a href="#" onclick="show('contact')">Contact</a><a href="#" onclick="show('privacy')">Privacy</a><a href="#" onclick="show('disclosure')">Affiliate Disclosure</a><p class="small">As an Amazon Associate I earn from qualifying purchases.</p></div></footer>
 
 <script>
-const guides=[
-["Best Budget Wireless Headphones","Electronics","Compare comfort, battery life, microphone quality and connectivity.","wireless headphones"],
-["Best Earbuds for Everyday Use","Electronics","Check fit, sound, call quality, battery life and charging.","earbuds"],
-["Best Smartwatches for Beginners","Electronics","Compare display, battery, fitness features and phone compatibility.","smartwatch"],
-["Best Power Banks for Travel","Electronics","Consider capacity, charging speed, ports and portability.","power bank"],
-["Best Work-from-Home Accessories","Work","Useful desk upgrades for people who work or study at home.","work from home accessories"],
-["Best Laptop Stands","Work","Compare height, stability, portability and cooling design.","laptop stand"],
-["Best Computer Accessories","Work","A practical checklist for keyboards, mice, webcams and USB hubs.","computer accessories"],
-["Best Useful Kitchen Gadgets","Home","Choose products that save time, are easy to clean and solve a real need.","kitchen gadgets"],
-["Best Travel Accessories","Travel","Compare organizers, backpacks, bottles and other useful essentials.","travel accessories"],
-["Best Budget Home Products","Home","Compare usefulness, durability and ease of use for everyday products.","home products"]
+
+<script>
+const guides = [
+  ["Best Budget Wireless Headphones","Electronics","Compare comfort, battery life, microphone quality and connectivity.","wireless headphones"],
+  ["Best Earbuds for Everyday Use","Electronics","Check fit, sound, call quality, battery life and charging.","earbuds"],
+  ["Best Smartwatches for Beginners","Electronics","Compare display, battery, fitness features and phone compatibility.","smartwatch"],
+  ["Best Power Banks for Travel","Electronics","Consider capacity, charging speed, ports and portability.","power bank"],
+  ["Best Work-from-Home Accessories","Work","Useful desk upgrades for people who work or study at home.","work from home accessories"],
+  ["Best Laptop Stands","Work","Compare height, stability, portability and cooling design.","laptop stand"],
+  ["Best Computer Accessories","Work","A practical checklist for keyboards, mice, webcams and USB hubs.","computer accessories"],
+  ["Best Useful Kitchen Gadgets","Home","Choose products that save time, are easy to clean and solve a real need.","kitchen gadgets"],
+  ["Best Travel Accessories","Travel","Compare organizers, backpacks, bottles and other useful essentials.","travel accessories"],
+  ["Best Budget Home Products","Home","Compare usefulness, durability and ease of use for everyday products.","home products"]
 ];
-function show(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);if(id==='guides')render(guides)}
-function render(arr){document.getElementById('list').innerHTML=arr.map((g,i)=>`<div class="card"><span class="tag">${g[1]}</span><h3>${g[0]}</h3><p>${g[2]}</p><a class="btn" href="#" onclick="read(${guides.indexOf(g)})">Read Guide</a></div>`).join('')}
-function read(i){let g=guides[i];document.getElementById('article').innerHTML=`<div class="card"><a href="#" onclick="show('guides')">← Back to guides</a><p><span class="tag">${g[1]}</span></p><h1>${g[0]}</h1><p>${g[2]}</p><h2>What to look for</h2><p>Start with your actual use case. Compare the features that matter to you rather than choosing only from the longest specification list.</p><h2>Quick checklist</h2><ul><li>Choose features that solve your specific need.</li><li>Check compatibility with your existing devices.</li><li>Consider size, durability and ease of use.</li><li>Verify current product information before buying.</li></ul><h2>Our approach</h2><p>Hidayath Mart focuses on practical value and clear explanations. Prices, specifications and availability can change, so verify current information on the retailer's page.</p><a class="btn orange" href="#" onclick="amazon('${g[3]}')">Check Current Options on Amazon</a> <span class="paid">(paid link)</span><div class="disclosure"><b>Affiliate disclosure:</b> As an Amazon Associate I earn from qualifying purchases.</div></div>`;show('article')}
-function search(){let q=document.getElementById('search').value.toLowerCase();show('guides');render(guides.filter(g=>(g[0]+' '+g[1]+' '+g[2]).toLowerCase().includes(q)))}
-function amazon(q){window.open('https://link.amazon/A09xqlCsv','_blank')}('This is a safe placeholder. After you join Amazon Associates, replace this button with the Amazon Special Link generated in Associates Central for: '+q)}
+
+function show(id) {
+  const page = document.getElementById(id);
+  if (!page) return;
+
+  document.querySelectorAll(".page").forEach(function (item) {
+    item.classList.remove("active");
+  });
+
+  page.classList.add("active");
+  window.scrollTo(0, 0);
+
+  if (id === "guides") render(guides);
+}
+
+function render(items) {
+  const list = document.getElementById("list");
+  if (!list) return;
+
+  if (items.length === 0) {
+    list.innerHTML = "<p>No guides found. Try another search.</p>";
+    return;
+  }
+
+  list.innerHTML = items.map(function (g) {
+    const index = guides.indexOf(g);
+    return `
+      <div class="card">
+        <span class="tag">${g[1]}</span>
+        <h3>${g[0]}</h3>
+        <p>${g[2]}</p>
+        <a class="btn" href="#" onclick="read(${index}); return false;">Read Guide</a>
+      </div>`;
+  }).join("");
+}
+
+function read(index) {
+  const g = guides[index];
+  if (!g) return;
+
+  document.getElementById("article").innerHTML = `
+    <div class="card">
+      <a href="#" onclick="show('guides'); return false;">← Back to guides</a>
+      <p><span class="tag">${g[1]}</span></p>
+      <h1>${g[0]}</h1>
+      <p>${g[2]}</p>
+
+      <h2>What to look for</h2>
+      <p>Start with your actual needs. Compare important features rather than choosing a product only because it has the most specifications.</p>
+
+      <h2>Quick checklist</h2>
+      <ul>
+        <li>Choose features that solve your specific need.</li>
+        <li>Check compatibility with your existing devices.</li>
+        <li>Consider size, durability and ease of use.</li>
+        <li>Read recent customer reviews and verify current details.</li>
+      </ul>
+
+      <h2>Our approach</h2>
+      <p>Hidayath Mart focuses on practical value and clear explanations. Prices, specifications and availability may change.</p>
+
+      <a class="btn orange" href="#"
+         onclick="amazon('${g[3]}'); return false;">Check Current Options on Amazon</a>
+      <div class="paid">(paid link)</div>
+
+      <div class="disclosure">
+        <b>Affiliate disclosure:</b>
+        As an Amazon Associate I earn from qualifying purchases.
+      </div>
+    </div>`;
+
+  show("article");
+}
+
+function search() {
+  const query = document.getElementById("search").value
+    .trim()
+    .toLowerCase();
+
+  show("guides");
+
+  render(guides.filter(function (g) {
+    return g.join(" ").toLowerCase().includes(query);
+  }));
+}
+
+function amazon(query) {
+  const url = "https://www.amazon.in/s?k="
+    + encodeURIComponent(query)
+    + "&tag=hidayathmart-21";
+
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+
 render(guides);
+</script>
 </script></body></html>
